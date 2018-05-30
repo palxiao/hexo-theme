@@ -2,7 +2,7 @@
 
 menu:
   主页: /
-  # 随笔: /tags/随笔/
+  随笔: /tags/个人博客/
 
 # SubNav
 subnav:
@@ -115,7 +115,7 @@ slider:
 #smart_menu:
 #  friends: false
 smart_menu:
-  innerArchive: '所有文章'
+  innerArchive: '搜索文章 '
   friends: false
   aboutme: '关于我'
 
