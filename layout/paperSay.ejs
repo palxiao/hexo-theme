@@ -44,7 +44,7 @@ function initTips(){
                     var text = tips.text;
                     if(Array.isArray(tips.text)) text = tips.text[Math.floor(Math.random() * tips.text.length + 1)-1];
                     text = text.renderTip({text: '「 <span style="color:#0099cc;">'+$(this).text()+'</span> 」'});
-                    showMessage(text, 1000);
+                    showMessage(text, 3000);
                 });
             });
             // $.each(result.click, function (index, tips){
@@ -131,6 +131,24 @@ function hideMessage(timeout){
 function initLive2d (){
     $('.hide-button').fadeOut(0).on('click', () => {
         $('#landlord').css('display', 'none')
+        $("#live2dcanvas").animate({
+            opacity: 0.1,
+            height:'0px',
+            width:'0px'
+        },() => {
+            $('#live2dcanvas').hide()
+            $('#iamhiding').show()
+        });
+    })
+    $('#iamhiding').fadeOut(0).on('click', () => {
+        $('#landlord').show()
+        $('#iamhiding').hide()
+        $('#live2dcanvas').show()
+        $("#live2dcanvas").animate({
+            opacity: 0.8,
+            height:'360px',
+            width:'200px'
+        });
     })
     $('#landlord').hover(() => {
         $('.hide-button').fadeIn(100)
