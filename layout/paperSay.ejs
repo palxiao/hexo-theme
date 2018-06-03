@@ -103,13 +103,27 @@ initTips();
     showMessage(text, 5000);
 })();
 
-window.setInterval(showHitokoto,20000);
+var sayInterval = 15000;
+var saySomething = window.setInterval(showHitokoto,sayInterval);
 
 function showHitokoto(){
     var hitokoto_type = 'c'
     if (Math.random()>0.5) hitokoto_type = 'a'
     $.getJSON('https://v1.hitokoto.cn/?c='+hitokoto_type,function(result){
         showMessage(result.hitokoto+'「 '+result.from+' 」', 6000);
+    });
+}
+function talk2tuling(msg){
+    $.ajax({
+        type: 'POST',
+        url: 'http://www.tuling123.com/openapi/api',
+        data: {
+            key: '6e41110166d0464db62950406c72d3da',
+            info: msg
+        },
+        success: function (result) {
+            showMessage(result.text, 20000);
+        }
     });
 }
 
@@ -129,7 +143,7 @@ function hideMessage(timeout){
 }
 
 function initLive2d (){
-    $('.hide-button').fadeOut(0).on('click', () => {
+    $('#quicklyHide').fadeOut(0).on('click', () => {
         $('#landlord').css('display', 'none')
         $("#live2dcanvas").animate({
             opacity: 0.1,
@@ -138,6 +152,14 @@ function initLive2d (){
         },() => {
             $('#live2dcanvas').hide()
             $('#iamhiding').show()
+        });
+    })
+    $('#chatbot').hover(() => {
+        $('.chatbotkuang').show()
+        $(".chatbotkuang").animate({
+            opacity: 1,
+            height:'80px',
+            width:'150px'
         });
     })
     $('#iamhiding').fadeOut(0).on('click', () => {
@@ -152,8 +174,14 @@ function initLive2d (){
     })
     $('#landlord').hover(() => {
         $('.hide-button').fadeIn(100)
+        clearInterval(saySomething)
     }, () => {
+        $(".chatbotkuang").fadeOut(0)
         $('.hide-button').fadeOut(300)
+        saySomething = window.setInterval(showHitokoto,sayInterval);
+    })
+    $('#chat-fasong').on('click', () => {
+        talk2tuling($('#chatContent').text())
     })
 }
 initLive2d ();
