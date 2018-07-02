@@ -121,7 +121,7 @@
 		bottom: 0;
 		width: 280px;
 		height: 250px;
-		z-index: 10000;
+		// z-index: -1;
 		// font-size: 0;
 		// transition: all .3s ease-in-out;
 	}
@@ -132,7 +132,7 @@
 		height: auto;
 		margin: auto;
 		padding: 7px;
-		top: -80px;
+		top: -50px;
 		// left: -32px;
 		text-align: center;
 		border: 1px solid rgba(255,137,255,.4);

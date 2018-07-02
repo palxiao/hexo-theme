@@ -183,6 +183,12 @@ function initLive2d (){
     $('#chat-fasong').on('click', () => {
         talk2tuling($('#chatContent').text())
     })
+    $('#chatContent').keydown(function(e){
+        if(e.keyCode==13){
+            e.preventDefault()
+            $('#chat-fasong').trigger('click')
+        }
+    })
 }
 initLive2d ();
 
